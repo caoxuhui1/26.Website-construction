@@ -1,0 +1,624 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --grass-green: #4caf50;
+    --sky-blue: #87ceeb;
+    --sun-yellow: #ffeb3b;
+    --sheep-white: #f5f5f5;
+    --wolf-gray: #9e9e9e;
+    --accent-red: #f44336;
+    --accent-pink: #f48fb1;
+    --accent-orange: #ffb74d;
+    --accent-purple: #7e57c2;
+}
+
+body {
+    background: linear-gradient(to bottom, var(--sky-blue), #e0f7fa);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    font-family: 'ZCOOL XiaoWei', serif;
+    color: #333;
+}
+
+/* 背景装饰元素 */
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    z-index: -1;
+    animation: float 30s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateX(-10vw); }
+    100% { transform: translateX(110vw); }
+}
+
+.grass {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,10 Q10,5 20,10 T40,5 T60,10 T80,5 T100,10 L100,10 L0,10 Z" fill="%234caf50"/></svg>') repeat-x bottom;
+    z-index: -1;
+}
+
+/* 顶部导航栏 */
+header {
+    background: rgba(76, 175, 80, 0.95);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+    margin-right: 15px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.logo h1 {
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: var(--sun-yellow);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after {
+    width: 70%;
+}
+
+/* 主横幅区域 */
+.hero {
+    height: 500px;
+    background: linear-gradient(rgba(135, 206, 235, 0.7), rgba(76, 175, 80, 0.6)), 
+                url('https://images.unsplash.com/photo-1542272201-b1ca555ef850?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero h2 {
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    animation: fadeInDown 1s ease;
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--sun-yellow);
+    color: #333;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+    border: none;
+    cursor: pointer;
+    font-family: 'ZCOOL XiaoWei', serif;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background: #ffd600;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 235, 59, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0); }
+}
+
+/* 角色展示区 */
+.characters {
+    padding: 80px 5%;
+    background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--grass-green);
+    font-size: 2.5rem;
+    position: relative;
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--accent-red);
+    border-radius: 2px;
+}
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.character-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.character-card:hover {
+    transform: translateY(-10px);
+}
+
+.character-img {
+    height: 280px;
+    background: var(--sky-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.character-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.character-card:hover .character-img img {
+    transform: scale(1.05);
+}
+
+.character-img::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, var(--grass-green), transparent);
+    z-index: 1;
+}
+
+.character-info {
+    padding: 20px;
+}
+
+.character-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--grass-green);
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+.character-info p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* 课程展示区 */
+.courses {
+    padding: 80px 5%;
+    background: linear-gradient(to bottom, #c8e6c9, #a5d6a7);
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.course-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--grass-green);
+}
+
+.course-card h3 {
+    font-size: 1.8rem;
+    color: var(--grass-green);
+    margin-bottom: 15px;
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+.course-card p {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.course-card ul {
+    padding-left: 20px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.course-card ul li {
+    margin-bottom: 8px;
+    list-style-type: none;
+    position: relative;
+    padding-left: 25px;
+}
+
+.course-card ul li::before {
+    content: '✓';
+    color: var(--grass-green);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+}
+
+/* 活动区域 */
+.events {
+    padding: 80px 5%;
+    background: url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover fixed;
+    position: relative;
+}
+
+.events::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 175, 80, 0.85);
+}
+
+.events-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.event-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.event-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-5px);
+}
+
+.event-date {
+    background: var(--accent-red);
+    color: white;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.event-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+.event-card p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* 内容展示区 */
+.content-section {
+    padding: 80px 5%;
+    background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.content-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-card h3 {
+    font-size: 1.8rem;
+    color: var(--grass-green);
+    margin-bottom: 15px;
+    font-family: 'Ma Shan Zheng', cursive;
+    border-bottom: 2px solid var(--accent-red);
+    padding-bottom: 10px;
+}
+
+.content-card ul {
+    padding-left: 20px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.content-card ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.content-card ul li::before {
+    content: '•';
+    color: var(--grass-green);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.5rem;
+}
+
+/* 页脚 */
+footer {
+    background: #2e7d32;
+    color: white;
+    padding: 50px 5% 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--sun-yellow);
+}
+
+.footer-column p, .footer-column li {
+    margin-bottom: 10px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column a {
+    color: var(--sun-yellow);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--sun-yellow);
+    transform: translateY(-5px);
+}
+
+.social-links a:hover i {
+    color: #333;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0.7;
+}
+
+/* 动画效果 */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav li {
+        margin: 5px;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
