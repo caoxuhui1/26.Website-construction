@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绿色农场 - 新鲜农产品直销平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>绿色农场</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">首页</a></li>
+                <li><a href="#products">产品</a></li>
+                <li><a href="#reviews">评价</a></li>
+                <li><a href="#about">关于我们</a></li>
+            </ul>
+            <div class="nav-links">
+                <li class="user-icon" id="user-icon">
+                    <i class="fas fa-user"></i>
+                </li>
+                <li class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </li>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 登录注册模态框 -->
+    <div class="auth-modal" id="auth-modal">
+        <button class="close-modal" id="close-modal">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="login-tab">登录</div>
+            <div class="auth-tab" id="register-tab">注册</div>
+        </div>
+        
+        <!-- 登录表单 -->
+        <div class="auth-form active" id="login-form">
+            <div class="form-icon">
+                <i class="fas fa-sign-in-alt"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-email">邮箱或用户名</label>
+                <input type="text" class="form-control" id="login-email" placeholder="请输入邮箱或用户名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-password">密码</label>
+                <input type="password" class="form-control" id="login-password" placeholder="请输入密码" required>
+            </div>
+            
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">记住我</label>
+                </div>
+                <a href="#" class="forgot-password">忘记密码?</a>
+            </div>
+            
+            <button class="auth-submit-btn" id="login-btn">
+                <i class="fas fa-sign-in-alt"></i> 登录
+            </button>
+            
+            <div class="social-login">
+                <p>其他方式登录</p>
+                <div class="social-icons">
+                    <div class="social-icon wechat">
+                        <i class="fab fa-weixin"></i>
+                    </div>
+                    <div class="social-icon qq">
+                        <i class="fab fa-qq"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="auth-switch">
+                还没有账号? <a href="#" id="switch-to-register">立即注册</a>
+            </div>
+        </div>
+        
+        <!-- 注册表单 -->
+        <div class="auth-form" id="register-form">
+            <div class="form-icon">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="register-username">用户名</label>
+                <input type="text" class="form-control" id="register-username" placeholder="请输入用户名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="register-email">邮箱</label>
+                <input type="email" class="form-control" id="register-email" placeholder="请输入邮箱" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="register-password">密码</label>
+                <input type="password" class="form-control" id="register-password" placeholder="请输入密码" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="register-confirm-password">确认密码</label>
+                <input type="password" class="form-control" id="register-confirm-password" placeholder="请再次输入密码" required>
+            </div>
+            
+            <button class="auth-submit-btn" id="register-btn">
+                <i class="fas fa-user-plus"></i> 注册
+            </button>
+            
+            <div class="social-login">
+                <p>使用社交账号注册</p>
+                <div class="social-icons">
+                    <div class="social-icon wechat">
+                        <i class="fab fa-weixin"></i>
+                    </div>
+                    <div class="social-icon qq">
+                        <i class="fab fa-qq"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="auth-switch">
+                已有账号? <a href="#" id="switch-to-login">立即登录</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 搜索框 -->
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" class="search-input" id="search-input" placeholder="搜索农产品...">
+            <button class="search-btn" id="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 横幅区域 -->
+        <div class="banner">
+            <h1>新鲜农产品直供</h1>
+            <p>直接从农场到您家餐桌，保证新鲜、健康、无添加</p>
+            <a href="#products" class="btn">
+                <i class="fas fa-hand-point-down hand-pointer"></i>
+                立即选购
+            </a>
+        </div>
+
+        <!-- 产品分类 -->
+        <div class="categories">
+            <div class="category">
+                <i class="fas fa-apple-alt"></i>
+                <h3>新鲜农产品</h3>
+                <p>当季鲜果，自然成熟</p>
+            </div>
+            <div class="category">
+                <i class="fas fa-carrot"></i>
+                <h3>有机蔬菜</h3>
+                <p>无农药，无化肥</p>
+            </div>
+            <div class="category">
+                <i class="fas fa-egg"></i>
+                <h3>禽蛋肉类</h3>
+                <p>散养禽类，健康美味</p>
+            </div>
+            <div class="category">
+                <i class="fas fa-wine-bottle"></i>
+                <h3>农副加工</h3>
+                <p>传统工艺，纯手工制作</p>
+            </div>
+        </div>
+
+        <!-- 热门产品 -->
+        <h2 class="section-title" id="products">热门农产品 (10种精选)</h2>
+        <div class="products">
+            <!-- 产品1: 有机西红柿 -->
+            <div class="product animated">
+                <img src="https://img95.699pic.com/photo/50430/3958.jpg_wh860.jpg" alt="有机西红柿" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">有机西红柿</h3>
+                    <p class="product-farmer">农户: 张大叔农场</p>
+                    <p class="product-description">自然成熟，无农药残留，酸甜多汁。采用有机种植方法，富含维生素C和番茄红素，是健康餐桌的首选。</p>
+                    <span class="product-origin">山东</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥5.99</span>
+                        <button class="add-to-cart" data-id="1">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品2: 红富士苹果 - 更新图片 -->
+            <div class="product animated delay-1">
+                <img src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/153089/27/29784/144651/6348fc2fEb3e6fc1f/cc485412aa399a1c.jpg" alt="红富士苹果" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">红富士苹果</h3>
+                    <p class="product-farmer">农户: 刘家果园</p>
+                    <p class="product-description">来自陕西的优质红富士苹果，果肉脆甜多汁，果皮薄而光滑。自然生长，无催熟剂，保留苹果最原始的美味。</p>
+                    <span class="product-origin">陕西</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥8.99</span>
+                        <button class="add-to-cart" data-id="5">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品3: 农家土鸡 -->
+            <div class="product animated delay-2">
+                <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.wRKQPEgLwDgAZBrVVHAr9wHaHW?rs=1&pid=ImgDetMain" alt="农家土鸡" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">农家土鸡</h3>
+                    <p class="product-farmer">农户: 周家养殖场</p>
+                    <p class="product-description">散养土鸡，自然生长120天以上，肉质紧实鲜美。无激素添加，富含优质蛋白质，是滋补养生的理想选择。</p>
+                    <span class="product-origin">湖北</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥45.99</span>
+                        <button class="add-to-cart" data-id="6">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品4: 手工红薯粉 -->
+            <div class="product animated delay-3">
+                <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.rYr65zlj3XCpungVZgMOzgHaE3?rs=1&pid=ImgDetMain" alt="手工红薯粉" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">手工红薯粉</h3>
+                    <p class="product-farmer">农户: 陈家作坊</p>
+                    <p class="product-description">传统工艺手工制作，无任何添加剂。口感Q弹爽滑，富含膳食纤维，是健康主食的优质选择。</p>
+                    <span class="product-origin">河南</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥12.99</span>
+                        <button class="add-to-cart" data-id="7">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品5: 有机黄瓜 -->
+            <div class="product animated delay-4">
+                <img src="https://img95.699pic.com/photo/50502/6713.jpg_wh860.jpg" alt="有机黄瓜" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">有机黄瓜</h3>
+                    <p class="product-farmer">农户: 孙家菜园</p>
+                    <p class="product-description">自然种植，新鲜采摘，口感清脆多汁。无农药残留，富含维生素和矿物质，适合生食、凉拌或做沙拉。</p>
+                    <span class="product-origin">江苏</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥4.99</span>
+                        <button class="add-to-cart" data-id="8">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品6: 有机西兰花 - 更新图片 -->
+            <div class="product animated delay-1">
+                <img src="https://pic.52112.com/180404/180404_24/Z7EkLYaNmq_small.jpg" alt="有机西兰花" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">有机西兰花</h3>
+                    <p class="product-farmer">农户: 绿色有机农场</p>
+                    <p class="product-description">无农药种植，富含维生素C和膳食纤维，口感清脆，是健康饮食的绝佳选择。</p>
+                    <span class="product-origin">云南</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥6.99</span>
+                        <button class="add-to-cart" data-id="9">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品7: 新鲜蓝莓 - 更新图片 -->
+            <div class="product animated delay-2">
+                <img src="https://pic.52112.com/180503/180503_31/IyH9RSccY2_small.jpg" alt="新鲜蓝莓" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">新鲜蓝莓</h3>
+                    <p class="product-farmer">农户: 蓝莓果园</p>
+                    <p class="product-description">自然成熟，果实饱满，酸甜适中，富含花青素，对眼睛健康特别有益。</p>
+                    <span class="product-origin">辽宁</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥15.99</span>
+                        <button class="add-to-cart" data-id="10">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品8: 土鸡蛋 - 更新图片 -->
+            <div class="product animated delay-3">
+                <img src="https://n.sinaimg.cn/sinakd10121/160/w1080h680/20200829/7fc7-iyhvyvc0868249.jpg" alt="土鸡蛋" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">土鸡蛋</h3>
+                    <p class="product-farmer">农户: 王家养鸡场</p>
+                    <p class="product-description">散养土鸡产的蛋，蛋黄颜色深，营养丰富，口感香醇。</p>
+                    <span class="product-origin">河北</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥18.99</span>
+                        <button class="add-to-cart" data-id="11">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品9: 野生蜂蜜 - 更新图片 -->
+            <div class="product animated delay-4">
+                <img src="https://p1.ssl.qhimg.com/t01bbf1e3872ddb0581.jpg" alt="野生蜂蜜" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">野生蜂蜜</h3>
+                    <p class="product-farmer">农户: 深山蜂场</p>
+                    <p class="product-description">采集深山野花酿造，无添加，纯天然，具有独特的芳香和丰富的营养价值。</p>
+                    <span class="product-origin">秦岭</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥49.99</span>
+                        <button class="add-to-cart" data-id="12">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品10: 有机土豆 - 更新图片 -->
+            <div class="product animated delay-5">
+                <img src="https://img95.699pic.com/photo/50640/0998.jpg_wh860.jpg" alt="有机土豆" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">有机土豆</h3>
+                    <p class="product-farmer">农户: 李家菜园</p>
+                    <p class="product-description">沙地种植，日照充足，口感粉糯，无农药残留，是家庭餐桌的常备食材。</p>
+                    <span class="product-origin">内蒙古</span>
+                    <div class="product-footer">
+                        <span class="product-price">¥3.99</span>
+                        <button class="add-to-cart" data-id="13">
+                            <i class="fas fa-cart-plus"></i> 加入购物车
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关于我们 -->
+        <div class="about-us" id="about">
+            <h2 class="section-title">关于我们</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3><i class="fas fa-university"></i> 单位信息</h3>
+                    <p>华中农业大学资源与环境学院农产品研究部成立于2005年，致力于农产品质量安全研究、有机农业技术推广和农产品供应链优化。我们拥有先进的实验室设备和专业的研究团队，与全国200多个农场建立了长期合作关系。</p>
+                </div>
+                
+                <div class="about-card">
+                    <h3><i class="fas fa-phone-alt"></i> 联系方式</h3>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-title">联系电话</div>
+                            <div class="info-desc">027-87654321 / 18012345678</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-title">电子邮箱</div>
+                            <div class="info-desc">info@greenfarm.edu.cn</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-title">地址</div>
+                            <div class="info-desc">湖北省武汉市洪山区狮子山街1号华中农业大学</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-card">
+                    <h3><i class="fas fa-clock"></i> 工作时间</h3>
+                    <p>我们的客服团队随时为您服务：</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem; line-height: 1.8;">
+                        <li>周一至周五: 8:00 - 20:00</li>
+                        <li>周六至周日: 9:00 - 18:00</li>
+                        <li>节假日: 10:00 - 16:00</li>
+                    </ul>
+                </div>
+                
+                <div class="about-card">
+                    <h3><i class="fas fa-truck"></i> 配送服务</h3>
+                    <p>我们提供全国范围的配送服务：</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem; line-height: 1.8;">
+                        <li>武汉市内：当日达（上午下单，下午送达）</li>
+                        <li>湖北省内：次日达（下单后24小时内送达）</li>
+                        <li>全国其他地区：2-3天送达</li>
+                        <li>冷链配送：所有生鲜产品使用专业冷链运输</li>
+                        <li>免费配送：订单满99元免配送费</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 用户评价 -->
+        <div class="reviews" id="reviews">
+            <h2 class="section-title">用户评价</h2>
+            <div class="review-list" id="review-list">
+                <!-- 评价将通过JavaScript动态加载 -->
+            </div>
+            
+            <!-- 评论表单 -->
+            <div class="review-form">
+                <h3 class="form-title">分享您的购物体验</h3>
+                <form id="review-form">
+                    <div class="form-group">
+                        <label for="user-name">您的昵称</label>
+                        <input type="text" class="form-control" id="user-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="user-comment">评价内容</label>
+                        <textarea class="form-control" id="user-comment" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>评分</label>
+                        <div class="rating-stars" id="rating-stars">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> 提交评价
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 购物车侧边栏 -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>我的购物车</h2>
+            <button class="close-cart" id="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- 购物车内容将通过JavaScript动态加载 -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>总计:</span>
+                <span id="cart-total">¥0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">
+                <i class="fas fa-check-circle"></i> 去结算
+            </button>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- 音乐控制 -->
+    <div class="music-control" id="music-control">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <!-- 背景音乐 -->
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>绿色农场</h3>
+                <p>致力于提供最新鲜、最健康的农产品，从田间到餐桌，全程品质保障。</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul class="footer-links">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#products">产品中心</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#reviews">用户评价</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone"></i> 027-87654321</li>
+                    <li><i class="fas fa-envelope"></i> info@greenfarm.edu.cn</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 湖北省武汉市洪山区狮子山街1号</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 华中农业大学资源与环境学院农产品研究部 版权所有
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
